@@ -23,6 +23,19 @@ button {
     outline: none;
     border: 2px solid transparent;
     border-radius: .4em;
+    font-weight: 900;
+    transition: all 0.1s ease-in-out;
+}
+
+button:hover {
+    cursor: pointer;
+    background-color: #f0f0f0de;
+    box-shadow: 0 0 16px 2px #f0f0f0;
+}
+
+button>span {
+    display: block;
+    font-size: .6em;
 }
 
 p {
