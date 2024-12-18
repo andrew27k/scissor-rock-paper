@@ -76,7 +76,7 @@ function checkRound() {
         modal.style.visibility = "visible"
         modalMsg.style.color = loserColor;
         modalMsg.style.filter = `drop-shadow(0 0 15px ${loserColor})`;
-        modalMsg.innerHTML = "You LOSE!";
+        modalMsg.innerHTML = "You Lost!";
     }
 }
 
