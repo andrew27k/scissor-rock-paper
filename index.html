@@ -3,22 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon/favicon-16x16.png">
+    <link rel="manifest" href="assets/img/favicon/site.webmanifest">
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
-    <title>Scissor, Rock, Paper</title>
+    <title>Scissor Rock Paper</title>
 </head>
 <style>
     
 </style>
 <body>
 
+    <header>
+        <h1>Scissor Rock Paper</h1>
+        <h4>Best of 5 Wins!</h4>
+    </header>
+
     <div class="container">
-        <button id="startBtn">Click to Start!<span>"Best of 5 Wins!"</span></button>
-        <p>Press "SHIFT" + "STRG" + "J" or "F12" to open the Console</p>
-        <p>Click the Start button for start the Game!</p>
+        <p id="info">Take your move</p>
+        <div class="count-container">
+            <div class="card-container">
+                <span class="img human-img">❔</span>
+                <sppan class="score">Player: <span id="humanCounter" class="counter">0</span></p>
+            </div>
+            <div class="card-container">
+                <span class="img computer-img">❔</span>
+                <span class="score">Computer: <span id="computerCounter" class="counter">0</span></span>
+            </div>
+        </div>
+        <div class="option-container">
+            <button class="option-box" id="scissor"><span class="item">✂️</span></button>
+            <button class="option-box" id="rock"><span class="item">🪨</span></button>
+            <button class="option-box" id="paper"><span class="item">🧻</span></button>
+        </div>
     </div>
 
-    
+    <dialog id="endGameModal">
+        <h2">Game Over</h2>
+        <p id="modalMsg">You won!!</p>
+        <button id="newGame" autofocus>Play again</button>
+    </dialog>
 
     
 </body>

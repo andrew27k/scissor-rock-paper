@@ -2,45 +2,218 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    
 }
 
 body {
     background-color: rgb(11, 12, 29);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+header {
+    text-align: center;
+    padding: 1.3em;
+    margin-bottom: 2em;
+    margin-top: 1em;
+    border-bottom: 2px solid #3c096c;
+}
+
+header h1{
+    color: #3c096c;
+    filter: drop-shadow(0px 0px 9px #3c096c);
+    font-size: 3em;
+}
+
+header h4{
+    color: #f0f0f0;
+    font-weight: bold;
+    font-size: 1.2em;
 }
 
 .container {
+    text-align: center;
+    margin: 0 auto;
+    max-width: 1000px;
     display: flex;
     flex-direction: column;
     flex-grow: auto;
     float: center;
+    color: #f0f0f0;
+    pointer-events: none;
 }
 
-button {
-    margin: 3em auto;
-    padding: 1em 3em;
+.container #info {
+    max-height: 2em;
+    font-size: 40px;
+}
+
+.count-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.card-container{
+    display: flex;
+    flex-direction: column;
+    margin: 3em 3em;
+}
+
+.card-container .img{
+    font-size: 4.5em;
+}
+
+.card-container .score {
     font-size: 2em;
+    padding: 1em 0;
+}
+
+.card-container .counter {
+    color: #3c096c;
+    font-weight: bold;
+    font-size: 1.4em;
+}
+
+
+.option-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 2em;
+}
+
+.option-box{
+    background-color: #3c096c48;
+    border-radius: .4em;
+    padding: 2em;
+    transition: all .06s ease-in-out;
+    pointer-events: all;
     outline: none;
     border: 2px solid transparent;
-    border-radius: .4em;
-    font-weight: 900;
-    transition: all 0.1s ease-in-out;
 }
 
-button:hover {
+.option-box:hover {
     cursor: pointer;
-    background-color: #f0f0f0de;
-    box-shadow: 0 0 16px 2px #f0f0f0;
+    transform: scale(1.1);
 }
 
-button>span {
-    display: block;
-    font-size: .6em;
+.option-box .item{
+    font-size: 4em;
+    pointer-events: none;
+    filter: grayscale(100%);
+    
 }
 
-p {
-    font-size: 1.3em;
-    margin: 0 auto;
+.option-box:hover .item{
+    filter: drop-shadow(0 0 8px #ffc83d);
+    transform: scale(1.3em);
+    cursor: pointer;
+}
+
+
+#endGameModal {
+    visibility: hidden;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font-size: 2em;
+    padding: 2em;
+    outline: none;
+    border: 2px solid transparent;
+    background-color: rgba(11, 12, 29, 0.877);
     color: white;
-    padding: 1em 2em;
+    box-shadow: 0 0 15px 14px #3c096ca4;
+    border-radius: 1em;
+}
+
+#endGameModal h2 {
+    color: white;
+}
+
+
+#endGameModal::backdrop {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+#endGameModal p {
+    margin: 1em 0;
+}
+
+#endGameModal button {
+    background-color: #3c096c;
+    border: 2px solid transparent;
+    outline: none;
+    padding: 1em 0;
+    width: 100%;
+    color: white;
+    font-size: .7em;
+    border-radius: 1em;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 700px) {
+    body {
+        padding: 0 1em 1em 1em;
+    }
+    header {
+        text-align: center;
+        padding: 1.3em;
+        margin-bottom: 2em;
+        margin-top: 0;
+    }
+    
+    header h1{
+        color: #3c096c;
+        filter: drop-shadow(0px 0px 9px #3c096c);
+        font-size: 2.4em;
+    }
+    
+    header h4{
+        color: #f0f0f0;
+        font-weight: bold;
+        font-size: 1.2em;
+    }
+    #endGameModal {
+        padding: 1em;
+        font-size: 1.7em;
+    }
+    .container #info {
+        font-size: 20px;
+        padding: .6em;
+    }
+    .card-container .img{
+        font-size: 3em;
+    }
+    .card-container .score {
+        font-size: 1.4em;
+        padding: 1em 0;
+    }
+    
+    .card-container .counter {
+        color: #3c096c;
+        font-weight: bold;
+        font-size: 1.4em;
+    }
+    .option-container{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 1em;
+    }
+    
+    .option-box{
+        background-color: #3c096c48;
+        border-radius: .4em;
+        padding: 1em;
+        transition: all .06s ease-in-out;
+        pointer-events: all;
+        outline: none;
+        border: 2px solid transparent;
+    }
 }

@@ -1,7 +1,19 @@
-const startBtn = document.getElementById('startBtn')
-const cssRoundWon = "background: #222; color: #aacc00";
-const cssRoundLost = "background: #222; color: #bc4749";
-const cssRoundTie = "background: #222; color: #ffff3f";
+//#################ITEMS#################
+//btn
+const valueBtn = document.querySelectorAll('.option-box')
+//info
+const info = document.getElementById('info');
+const humanCounter = document.getElementById('humanCounter');
+const computerCounter = document.getElementById('computerCounter');
+const humanImg = document.querySelector('.human-img');
+const ComputerImg = document.querySelector('.computer-img');
+const container = document.querySelector('.container');
+const modal = document.getElementById('endGameModal');
+const playAgainBtn = document.getElementById('newGame');
+const modalMsg = document.getElementById('modalMsg');
+//#################CSS#################
+const winnerColor = "#aaf683";
+const loserColor = "#bd1f36";
 
 
 let humanScore = 0;
@@ -10,81 +22,101 @@ let computerScore = 0;
 
 function getComputerChoice() {
     let computerChoice;
-    let computerNumber = Math.floor(Math.random() * 3 + 1);
-    if (computerNumber == 1) {
+    let computerNumber = Math.floor(Math.random() * 3 );
+    if (computerNumber == 0) {
         computerChoice = "scissor";
-    } else if (computerNumber == 2) {
+        ComputerImg.innerText = "✂️";
+    } else if (computerNumber == 1) {
         computerChoice = "rock";
+        ComputerImg.innerText = "🪨";
     } else {
         computerChoice = "paper";
+        ComputerImg.innerText = "🧻";
     }
     return computerChoice;
 }
 
-function getHumanChoice() {
-    let humanChoice = window.prompt("Choose between Scissor, Rock or Paper");
-    if (humanChoice === null || humanChoice === "") {
-        window.alert("You have to enter a value")
-        getHumanChoice();
-    } else {
-        return humanChoice.toLowerCase();
-    }
-    
+
+
+playAgainBtn.addEventListener('click', () => {
+    modal.close();
+    location.reload();
+    modal.style.visibility = "hidden";
+})
+
+
+valueBtn.forEach(button => {
+    button.addEventListener('click', getHumanChoice)
+});
+
+
+function getHumanChoice(e) {
+   let humanChoice = e.target.id;
+   if (humanChoice == "scissor") {
+        humanImg.innerText = "✂️";
+   } else if (humanChoice == "rock") {
+        humanImg.innerText = "🪨";
+   }else {
+        humanImg.innerText = "🧻";
+   }
+
+    playRound(humanChoice, getComputerChoice());
+
 }
 
-const playGame = () => {
+function checkRound() {
+    if (humanScore == 5) {
+        modal.showModal();
+        modal.style.visibility = "visible"
+        modalMsg.style.color = winnerColor;
+        modalMsg.style.filter = `drop-shadow(0 0 15px ${winnerColor})`;
+        modalMsg.innerHTML = "You Won!";
+    } else if (computerScore == 5) {
+        modal.showModal();
+        modal.style.visibility = "visible"
+        modalMsg.style.color = loserColor;
+        modalMsg.style.filter = `drop-shadow(0 0 15px ${loserColor})`;
+        modalMsg.innerHTML = "You LOSE!";
+    }
+}
 
-    function playRound(humanChoice, computerChoice) {
+
+
+function playRound(humanChoice, computerChoice) {
 
         if (humanChoice === computerChoice) {
-            console.log("%cIt's a TIE", cssRoundTie);
-            console.log(`Score -> \n Human: ${humanScore} \n Computer: ${computerScore}`)
+            info.innerHTML = "Its a TIE!";
         } else if (humanChoice == "scissor") {
             if(computerChoice == "rock") {
-                computerScore++
-                console.log(`%cYou lost with ${humanChoice}, Computer took ${computerChoice}`, cssRoundLost);
-                console.log(`Score -> \n You: ${humanScore} \n Computer: ${computerScore}`);
+                computerScore++;
+                computerCounter.innerHTML = computerScore;
+                info.innerHTML = "Rock crushes Scissor! Computer wins this round!";
             } else {
                 humanScore++;
-                console.log(`%cYou won with ${humanChoice}, Computer took ${computerChoice}`, cssRoundWon);
-                console.log(`Score -> \n You: ${humanScore} \n Computer: ${computerScore}`);
+                humanCounter.innerHTML = humanScore;
+                info.innerHTML = "Scissor cuts Paper! You win this round!";
             }
         } else if (humanChoice =="rock"){
             if(computerChoice == "paper") {
                 computerScore++;
-                console.log(`%cYou lost with ${humanChoice}, Computer took ${computerChoice}`, cssRoundLost);
-                console.log(`Score -> \n You: ${humanScore} \n Computer: ${computerScore}`);
+                computerCounter.innerHTML = computerScore;
+                info.innerHTML = "Paper covers Rock! Computer wins this round!";
             } else {
                 humanScore++;
-                console.log(`%cYou won with ${humanChoice}, Computer took ${computerChoice}`, cssRoundWon);
-                console.log(`Score -> \n You: ${humanScore} \n Computer: ${computerScore}`);
+                humanCounter.innerHTML = humanScore;
+                info.innerHTML = "Rock crushes Scissor! You win this round!";
             }
         } else if (humanChoice == "paper") {
             if (computerChoice == "scissor") {
                 computerScore++;
-                console.log(`%cYou lost with ${humanChoice}, Computer took ${computerChoice}`, cssRoundLost);
-                console.log(`Score -> \n You: ${humanScore} \n Computer: ${computerScore}`);
+                computerCounter.innerHTML = computerScore;
+                info.innerHTML = "Scissor cuts Paper! Computer wins this round!";
             } else {
                 humanScore++;
-                console.log(`%cYou won with ${humanChoice}, Computer took ${computerChoice}`, cssRoundWon);
-                console.log(`Score -> \n You: ${humanScore} \n Computer: ${computerScore}`);
+                humanCounter.innerHTML = humanScore;
+                info.innerHTML = "Paper covers Rock! You win this round!";
             }
         } 
-    }
-        while (humanScore <= 5 || computerScore <= 5) {
-            if(humanScore == 5) {
-                window.alert('You won the Game! \n press enter to start a new Game!');
-                humanScore = 0;
-                computerScore = 0;
-            } else if (computerScore == 5) {
-                window.alert('Computer won the Game! \n press enter to start a new Game!');
-                computerScore = 0;
-                humanScore = 0;
-            } else {
-                playRound(getHumanChoice(), getComputerChoice());
-            }
 
-        }
+        checkRound()
 }
-
-startBtn.onclick = playGame;
