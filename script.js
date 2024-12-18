@@ -1,7 +1,19 @@
-const startBtn = document.getElementById('startBtn')
-const cssRoundWon = "background: #222; color: #aacc00";
-const cssRoundLost = "background: #222; color: #bc4749";
-const cssRoundTie = "background: #222; color: #ffff3f";
+//#################ITEMS#################
+//btn
+const valueBtn = document.querySelectorAll('.option-box')
+//info
+const info = document.getElementById('info');
+const humanCounter = document.getElementById('humanCounter');
+const computerCounter = document.getElementById('computerCounter');
+const humanImg = document.querySelector('.human-img');
+const computerImg = document.querySelector('.computer-img');
+const container = document.querySelector('.container');
+const modal = document.getElementById('endGameModal');
+const playAgainBtn = document.getElementById('newGame');
+const modalMsg = document.getElementById('modalMsg');
+//#################CSS#################
+const winnerColor = "#aaf683";
+const loserColor = "#bd1f36";
 
 
 let humanScore = 0;
@@ -13,10 +25,13 @@ function getComputerChoice() {
     let computerNumber = Math.floor(Math.random() * 3 );
     if (computerNumber == 0) {
         computerChoice = "scissor";
+        computerImg.innerHTML = "✂️"
     } else if (computerNumber == 2) {
         computerChoice = "rock";
+        computerImg.innerHTML ="🪨"
     } else {
         computerChoice = "paper";
+        computerImg.innerHTML = "🧻"
     }
     return computerChoice;
 }
